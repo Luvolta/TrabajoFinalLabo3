@@ -20,9 +20,8 @@ header {
 }
 
 header .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #ffc107;
+  width: 20vw;
+  height: 10vh;
 }
 
 header .search-bar input {
