@@ -2,9 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
 }
-body {
+.body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #222;
@@ -17,6 +16,7 @@ header {
   align-items: center;
   background-color: #333;
   padding: 10px;
+  padding-top:2rem;
 }
 
 header .logo {
@@ -25,10 +25,69 @@ header .logo {
 }
 
 header .search-bar input {
+  display: none;
   padding: 5px;
   border-radius: 5px;
   border: none;
   outline: none;
+}
+
+.menu{
+  position: absolute;
+  z-index: 200;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  right: -101%;
+  background-color: #842d2d;
+  text-align: center;
+  padding: 10px;
+  transition: .4s ease-in;
+}
+
+form{
+  width: 100%;
+  height: 10vh;
+  background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+form input{
+  width: 80%;
+  height: 5vh;
+  border: none;
+  outline: none;
+  padding: 5px;
+  background: transparent;
+  border-bottom: 1px solid #fff;
+}
+
+form input::placeholder{
+  color: #fff;
+}
+
+.active{
+  right: 0;
+  overflow-y: none;
+}
+
+.bloqueo{
+  overflow-y: hidden;
+  height: 100vh;
+}
+
+a	{
+  text-decoration: none;
+  color: #fff;
+}
+
+.menu ul li {
+  list-style: none;
+  margin-bottom: 5px;
+
 }
 
 header .menu-icon {
@@ -103,12 +162,16 @@ header .menu-icon {
 }
 
 .game-item {
+  border-radius: 10%;
   margin: 10px;
+  width: 80%;
   text-align: center;
+  background-color: #333;
+  padding-bottom: 1rem;
 }
 
 .game-item img {
-  width: 150px;
+  width: 100%;
   height: auto;
   border-radius: 10px;
 }
