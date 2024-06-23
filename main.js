@@ -25,12 +25,10 @@ function changeSlide(newSlide) {
     }, 500); 
 }
 
-
-
-
 // Función para obtener juegos desde la API de Rawg
 const apiKey = "c917c32c98164da594fa9b1655e69d07";
-const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}`;
+const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}&page_size=40`;
+const tagUrl = `https://api.rawg.io/api/tags?key=${apiKey}`;
 
 async function getGames() {
     try {
@@ -49,7 +47,7 @@ async function getGames() {
 
 async function getTags() {
     try {
-        const response = await fetch(`https://api.rawg.io/api/tags?key=${apiKey}`);
+        const response = await fetch(tagUrl);
         if (!response.ok) {
             throw new Error('La respuesta de red no fue satisfactoria.');
         }
@@ -64,14 +62,7 @@ async function getTags() {
 // Función para mostrar juegos y filtrar por categorías (tags)
 function displayGames(games, tags) {
     const gameContainer = document.getElementById("game-container");
-    const selectTag = document.createElement("select");
-    selectTag.id = "tag-filter";
-
-    // Opción por defecto para mostrar todos los juegos
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "Todos los juegos";
-    selectTag.appendChild(defaultOption);
+    const selectTag = document.getElementById("tag-filter");
 
     // Crear opciones para cada tag disponible
     tags.forEach((tag) => {
@@ -93,8 +84,6 @@ function displayGames(games, tags) {
         });
         renderFilteredGames(filteredGames);
     });
-
-    gameContainer.appendChild(selectTag);
 
     // Mostrar todos los juegos inicialmente
     renderFilteredGames(games);
