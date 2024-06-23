@@ -51,6 +51,8 @@ document.querySelector('.closeMenu-icon').addEventListener('click', function() {
 const apiKey = "c917c32c98164da594fa9b1655e69d07";
 const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}`;
 
+// Detail  https://api.rawg.io/api/games/{id}
+
 async function getGames() {
   const response = await fetch(apiUrl);
   const data = await response.json();
@@ -71,27 +73,29 @@ function displayGames(games) {
 
 document.addEventListener("DOMContentLoaded", getGames);
 
-//  document.getElementById('search-input').addEventListener('input', function() {
-//      const query = this.value.trim();
-//      if (query.length > 2) {  
-//          fetch(`${apiUrl}&search=${query}`)
-//              .then(response => response.json())
-//              .then(data => {
-//                  const resultsContainer = document.getElementById('results');
-//                  resultsContainer.innerHTML = '';  
-//                  data.results.forEach(item => {
-//                      const div = document.createElement('div');
-//                      div.classList.add('result-item');
-//                      div.innerHTML = `
-//                          <img src="${item.background_image}" alt="${item.name}">
-//                          <span>${item.name}</span>
-//                      `;
-//                      resultsContainer.appendChild(div);
-//                  });
-//              })
-//              .catch(error => console.error('Error:', error));
-//      } else {
-//          document.getElementById('results').innerHTML = '';  
-//      }
-//  });
-
+function displayGames(games) {
+    const gameContainer = document.getElementById("game-container");
+    games.forEach((game) => {
+      const gameCard = document.createElement("div");
+      const gameId = game.id; // Obtener el ID del juego
+  
+      // Agregar un evento de clic para abrir el detalle del juego
+      gameCard.addEventListener("click", () => {
+        openGameDetails(gameId);
+      });
+  
+      gameCard.innerHTML = `
+        <img src="${game.background_image}" alt="${game.name}">
+        <h3>${game.name}</h3>
+      `;
+  
+      gameContainer.appendChild(gameCard);
+    });
+  }
+  
+  function openGameDetails(gameId) {
+    const detailUrl = `https://api.rawg.io/api/games/${gameId}?key=${apiKey}`;
+  
+    // Abrir una nueva pestaña con la URL del detalle del juego
+    window.open(detailUrl, "_blank");
+  }
