@@ -11,6 +11,9 @@ document.querySelector('.prev').addEventListener('click', () => {
     changeSlide(currentSlide - 1);
 });
 
+
+
+
 function changeSlide(newSlide) {
     slides[currentSlide].classList.remove('active');
     
@@ -96,7 +99,7 @@ function displayGames(games) {
   
 
   // Función para abrir detalles del juego en una nueva pestaña
-async function openGameDetails(gameId) {
+  async function openGameDetails(gameId) {
     try {
         const detailUrl = `https://api.rawg.io/api/games/${gameId}?key=${apiKey}`;
         const response = await fetch(detailUrl);
@@ -105,31 +108,34 @@ async function openGameDetails(gameId) {
         }
         const gameDetail = await response.json();
 
-        // Abrir una nueva ventana/tab con los detalles del juego
         const newTab = window.open('', '_blank');
-        newTab.document.write(`
-            <html>
-            <head>
-                <title>${gameDetail.name}</title>
-                <style>
-                    body { font-family: Arial, sans-serif; }
-                    .game-detail { max-width: 600px; margin: 20px auto; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-                    .game-detail img { max-width: 100%; height: auto; display: block; margin: 10px auto; }
-                    .game-detail h2 { text-align: center; }
-                    .game-detail p { margin-bottom: 10px; }
-                </style>
-            </head>
-            <body>
-                <div class="game-detail">
-                    <h2>${gameDetail.name}</h2>
-                    <img src="${gameDetail.background_image}" alt="${gameDetail.name}">
-                    <p><strong>Rating:</strong> ${gameDetail.rating}</p>
-                    <p><strong>Released:</strong> ${gameDetail.released}</p>
-                    <p><strong>Description:</strong> ${gameDetail.description_raw}</p>
-                </div>
-            </body>
-            </html>
-        `);
+        if (newTab) {
+            newTab.document.write(`
+                <html>
+                <head>
+                    <title>${gameDetail.name}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; }
+                        .game-detail { max-width: 600px; margin: 20px auto; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+                        .game-detail img { max-width: 100%; height: auto; display: block; margin: 10px auto; }
+                        .game-detail h2 { text-align: center; }
+                        .game-detail p { margin-bottom: 10px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="game-detail">
+                        <h2>${gameDetail.name}</h2>
+                        <img src="${gameDetail.background_image}" alt="${gameDetail.name}">
+                        <p><strong>Rating:</strong> ${gameDetail.rating}</p>
+                        <p><strong>Released:</strong> ${gameDetail.released}</p>
+                        <p><strong>Description:</strong> ${gameDetail.description_raw}</p>
+                    </div>
+                </body>
+                </html>
+            `);
+        } else {
+            throw new Error('Failed to open new tab.');
+        }
     } catch (error) {
         console.error('Error fetching game details:', error);
         alert('Error fetching game details. Please try again later.');
