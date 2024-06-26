@@ -1,8 +1,9 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 .body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -38,14 +39,14 @@ header .search-bar input {
   height: 25px;
   cursor: pointer;
   z-index: 2;
-  transition: transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  -moz-transition: transform 0.2s;
-  -ms-transition: transform 0.2s;
-  -o-transition: all 0.2s;
+  transition: transform 0.1s;
+  -webkit-transition: transform 0.1s;
+  -moz-transition: transform 0.1s;
+  -ms-transition: transform 0.1s;
+  -o-transition: all 0.1s;
 }
 
-.hamburger-icon:active{
+.hamburger-icon:active {
   transform: scale(1.05);
   box-shadow: 0 0 5px #CCAB58;
 }
@@ -87,9 +88,10 @@ header .search-bar input {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
 }
 
-#menu-toggle:checked + .hamburger-icon + .dropdown-menu {
+#menu-toggle:checked+.hamburger-icon+.dropdown-menu {
   display: block;
 }
+
 .main-banner {
   position: relative;
   text-align: center;
@@ -124,21 +126,21 @@ header .search-bar input {
 }
 
 .banner-text {
-background: rgba(0, 0, 0, 0.493);
-box-shadow: 0 0 20px #e1e1e18c;
-position: absolute;
-width: 60%;
-height: 50%;
-padding: 20%;
-top: 50%;
-left: 50%;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-font-size: 2vw;
-display: flex;
-align-items: center;
-color: #ffffff;
-border-radius: 10px;
-transform: translate(-50% -50%);
+  background: rgba(0, 0, 0, 0.493);
+  box-shadow: 0 0 20px #e1e1e18c;
+  position: absolute;
+  width: 60%;
+  height: 50%;
+  padding: 20%;
+  top: 50%;
+  left: 50%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2vw;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  border-radius: 10px;
+  transform: translate(-50% -50%);
 }
 
 .slider-controls {
@@ -167,37 +169,37 @@ transform: translate(-50% -50%);
 }
 
 .game-item {
-  border-radius: 10%; 
+  border-radius: 10%;
   margin: 10px;
   margin-bottom: 200px;
   width: 80%;
   text-align: center;
   padding-bottom: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.game-card{
+.game-card {
   margin-bottom: 2vh;
-  background-image: linear-gradient(to bottom, rgba(204, 171, 88, 0) 0%, rgba(204, 171, 88)10%); 
+  background-image: linear-gradient(to bottom, rgba(204, 171, 88, 0) 0%, rgba(204, 171, 88)10%);
 }
 
 .game-item:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); 
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .game-item img {
   width: 100%;
   height: auto;
-  border-radius: 10px; 
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .game-item p {
   margin-top: 10px;
-  color: #fff; 
-  font-size: 1.1rem; 
+  color: #fff;
+  font-size: 1.1rem;
 }
 
 .filtro {
@@ -205,24 +207,91 @@ transform: translate(-50% -50%);
   border-radius: 10px;
   width: auto;
   height: auto;
-  padding: 10px 20px;
+  padding: 5px;
   text-align: center;
 }
-.filtro label {
-  margin-bottom: 10px; 
-  text-align: center;
-}
+
 .filtro select {
+  margin-top: 5px;
   padding: 5px 10px;
   background-color: #222;
   color: white;
   border-radius: 5px;
   border: 2px solid #797979;
-  
+
 }
 
-@media (max-width: 500px) {
-  header .logo {
-    width: 40vw;
+footer {
+  color: #fff;
+  background-color: #333;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  border-top: 2px solid #CCAB58;
+}
+
+
+/* Responsive Design */
+@media (max-width: 280px) {
+
+  .filtro,
+  footer {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 320px) {
+
+  .filtro,
+  footer {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .filtro,
+  footer {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .filtro,
+  footer {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .filtro,
+  footer {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .filtro,
+  footer {
+    padding: 30px;
+  }
+}
+
+@media (min-width: 1201px) {
+
+  .filtro,
+  footer {
+    padding: 35px;
+  }
+
+  .game-card {
+    width: 50%;
+    margin: auto;
+    display: block;
+    margin-bottom: 2vh;
+
   }
 }
