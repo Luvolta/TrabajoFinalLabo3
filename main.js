@@ -110,41 +110,88 @@ function renderFilteredGames(filteredGames) {
     });
 }
 
+
 // Función para abrir detalles del juego en una nueva pestaña
 async function openGameDetails(gameId) {
     try {
         const detailUrl = `https://api.rawg.io/api/games/${gameId}?key=${apiKey}`;
         const response = await fetch(detailUrl);
+        
         if (!response.ok) {
             throw new Error('La respuesta de red no fue satisfactoria.');
         }
+        
         const gameDetail = await response.json();
 
+        // Verificar si el juego está disponible para PC
+        const pcPlatform = gameDetail.platforms.find(platform => platform.platform.slug === 'pc');
+        if (!pcPlatform) {
+            throw new Error('El juego no tiene requisitos para la plataforma PC.');
+        }
+
+        // Obtener los requisitos de PC si están disponibles
+        const { minimum, recommended } = pcPlatform.requirements || {};
+
+        // Obtener las capturas de pantalla del juego
+        const screenshotsUrl = `https://api.rawg.io/api/games/${gameId}/screenshots?key=${apiKey}`;
+        const responseScr = await fetch(screenshotsUrl);
+
+        if (!responseScr.ok) {
+            throw new Error('La respuesta de red no fue satisfactoria.');
+        }
+
+        const gameScreenshots = await responseScr.json();
+        const screenshots = gameScreenshots.results.map(screenshot => screenshot.image);
+
+        
+        // Abrir una nueva pestaña y establecer su contenido
         const newTab = window.open('', '_blank');
         if (newTab) {
+            newTab.document.open();
             newTab.document.write(`
                 <html>
                 <head>
                     <title>${gameDetail.name}</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; }
-                        .game-detail { max-width: 600px; margin: 20px auto; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-                        .game-detail img { max-width: 100%; height: auto; display: block; margin: 10px auto; }
-                        .game-detail h2 { text-align: center; }
-                        .game-detail p { margin-bottom: 10px; }
-                    </style>
+                    <link rel="icon" type="image/svg+xml" href="public/icon.png">
+                    <link rel="stylesheet" href="detail.css">
                 </head>
                 <body>
                     <div class="game-detail">
+                        
+
                         <h2>${gameDetail.name}</h2>
                         <img src="${gameDetail.background_image}" alt="${gameDetail.name}">
-                        <p><strong>Rating:</strong> ${gameDetail.rating}</p>
-                        <p><strong>Lanzamiento:</strong> ${gameDetail.released}</p>
-                        <p><strong>Descripción:</strong> ${gameDetail.description_raw}</p>
+                        <div class="screenshots-container" id="screenshots-container"></div>
+                        <p><strong>Descripción:</strong><br>${gameDetail.description}</p>
+                        <p><strong>Géneros:</strong> ${gameDetail.genres.map(genre => genre.name).join(', ')}</p>
+                        <p><strong>Plataformas:</strong> ${gameDetail.platforms.map(platform => platform.platform.name).join(', ')}</p>
+                        <p><strong>Lanzamiento</strong>${gameDetail.released}</p>
+                        <p><strong>Metacritic:</strong> ${gameDetail.metacritic}</p>
+                        <div class="requisitos">
+                            ${minimum ? `<strong>Requisitos Mínimos:</strong><br>${minimum}<br>` : ''}
+                            ${recommended ? `<strong>Requisitos Recomendados:</strong><br>${recommended}<br>` : ''}
+                        </div>
                     </div>
+
                 </body>
                 </html>
             `);
+
+            // Agregar las capturas de pantalla al contenedor
+            const screenshotsContainer = newTab.document.getElementById('screenshots-container');
+            if (screenshotsContainer) {
+                screenshots.forEach((screenshotUrl) => {
+                    const imageEl = newTab.document.createElement('img');
+                    imageEl.src = screenshotUrl;
+                    imageEl.alt = gameDetail.name;
+                    screenshotsContainer.appendChild(imageEl);
+                });
+            } else {
+                console.error('No se encontró el contenedor de capturas de pantalla en la nueva pestaña.');
+            }
+            
+            
+            newTab.document.close();
         } else {
             throw new Error('No se pudo abrir la nueva pestaña.');
         }
@@ -153,8 +200,7 @@ async function openGameDetails(gameId) {
         alert('Error al obtener detalles del juego. Por favor, inténtalo de nuevo más tarde.');
     }
 }
-
 // Evento al cargar el DOM para obtener juegos y tags
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",async () => {
     getGames();
 });
