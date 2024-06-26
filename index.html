@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="public/logo.png">
+    <link rel="icon" type="image/svg+xml" href="public/icon.png">
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fun Zone</title>
@@ -11,43 +11,43 @@
 
 <body class="body">
 
-    <div class="menu-container">
-        <button class="menu-icon">Abrir Menú</button>
-        <nav class="menu">
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Sobre Nosotros</a></li>
-                <li><a href="#">Servicios</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-            <button class="close-menu-icon">Cerrar Menú</button>
-        </nav>
-    </div>
     <header>
-        <img src="/public/logo.png" alt="" class="logo">
+        <img src="public/logo.png" alt="" class="logo">
         <div class="search-bar">
-            <input type="text" placeholder="Buscar...">
-        </div>
-        <div class="menu-icon">☰</div>
+            <nav class="navbar">
 
+                <input type="checkbox" id="menu-toggle" />
+                <label for="menu-toggle" class="hamburger-icon">
+                  <div class="line"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </label>
+                <div class="dropdown-menu">
+                  <a href="#">Inicio</a>
+                  <a href="#">Sobre nsotros</a>
+                  <a href="#">Servicios</a>
+                  <a href="#">Contacto</a>
+                </div>
+              </nav>
+        
     </header>
     <main>
         <section class="main-banner">
             <div class="slider">
                 <div class="slide active">
-                    <img src="public/dl3d5ccidn9wlkemhfjr.jpg" alt="Slide 1">
+                    <img src="public/doom_eternal-5059405.jpg" alt="Slide 1">
                 </div>
                 <div class="slide">
-                    <img src="public/DMC6.jpg" alt="Slide 2">
+                    <img src="public/assassin__039_s_creed__2017_-5207810.jpg" alt="Slide 2">
                 </div>
                 <div class="slide">
-                    <img src="public/dl3d5ccidn9wlkemhfjr.jpg" alt="Slide 3">
+                    <img src="public/Devil-May-Cry-HD-500x214.jpg" alt="Slide 3">
                 </div>
                 <div class="slide">
-                    <img src="public/DMC6.jpg" alt="Slide 4">
+                    <img src="public/33vyds6rg6l51.jpg" alt="Slide 4">
                 </div>
                 <div class="slide">
-                    <img src="public/dl3d5ccidn9wlkemhfjr.jpg" alt="Slide 5">
+                    <img src="public/firewatch-games-artist-digital-art-wallpaper-preview.jpg" alt="Slide 5">
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
         </section>
         <section class="game-list">
             
-            <form action="" method="">
+            <form action="" method="" class="filtro">
                 <label for="tag-filter">Filtrar por categoría:</label>
                 <select name="tags" id="tag-filter">
                     <option value="">Todos los juegos</option>

@@ -6,7 +6,7 @@
 .body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #222;
+  background-color: #0B0B0B;
   color: #fff;
 }
 
@@ -14,14 +14,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #151515;
   padding: 10px;
-  padding-top:2rem;
 }
 
 header .logo {
-  width: 20vw;
-  height: 10vh;
+  width: 200px;
 }
 
 header .search-bar input {
@@ -32,69 +30,66 @@ header .search-bar input {
   outline: none;
 }
 
-.menu{
-  position: absolute;
-  z-index: 200;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  right: -101%;
-  background-color: #842d2d;
-  text-align: center;
-  padding: 10px;
-  transition: .4s ease-in;
-}
-
-form{
-  width: 100%;
-  height: 10vh;
-  background-color: #222;
+.hamburger-icon {
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
-form input{
-  width: 80%;
-  height: 5vh;
-  border: none;
-  outline: none;
-  padding: 5px;
-  background: transparent;
-  border-bottom: 1px solid #fff;
-}
-
-form input::placeholder{
-  color: #fff;
-}
-
-.active{
-  right: 0;
-  overflow-y: none;
-}
-
-.bloqueo{
-  overflow-y: hidden;
-  height: 100vh;
-}
-
-a	{
-  text-decoration: none;
-  color: #fff;
-}
-
-.menu ul li {
-  list-style: none;
-  margin-bottom: 5px;
-
-}
-
-header .menu-icon {
-  font-size: 24px;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
   cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  -moz-transition: transform 0.2s;
+  -ms-transition: transform 0.2s;
+  -o-transition: all 0.2s;
 }
 
+.hamburger-icon:active{
+  transform: scale(1.05);
+  box-shadow: 0 0 5px #CCAB58;
+}
+
+.hamburger-icon .line {
+  width: 100%;
+  height: 4px;
+  background-color: white;
+}
+
+#menu-toggle {
+  display: none;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 15px;
+  z-index: 1;
+  width: 150px;
+  margin: 5px;
+}
+
+.dropdown-menu a {
+  display: block;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid #555;
+  border: 2px solid #CCAB58;
+  border-radius: 20px;
+  background-color: #151515;
+  transition: 0.5s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #353535;
+  transform: scale(1.2);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+#menu-toggle:checked + .hamburger-icon + .dropdown-menu {
+  display: block;
+}
 .main-banner {
   position: relative;
   text-align: center;
@@ -105,6 +100,9 @@ header .menu-icon {
   position: relative;
   width: 100%;
   overflow: hidden;
+  border-top: 5px solid #CCAB58;
+  border-bottom: 5px solid #CCAB58;
+
 }
 
 
@@ -122,18 +120,25 @@ header .menu-icon {
 
 .slide img {
   width: 100%;
-  height: auto;
+  height: 50vw;
 }
 
 .banner-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px;
-  border-radius: 10px;
+background: rgba(0, 0, 0, 0.493);
+box-shadow: 0 0 20px rgba(225,225, 225, 0.548);
+position: absolute;
+width: 60%;
+height: 50%;
+padding: 20%;
+top: 50%;
+left: 50%;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 2vw;
+display: flex;
+align-items: center;
+color: #ffffff;
+border-radius: 10px;
+transform: translate(-50% -50%);
 }
 
 .slider-controls {
@@ -174,42 +179,36 @@ header .menu-icon {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .game-item p {
   margin-top: 10px;
 }
 
-.game-details {
+.filtro {
   background-color: #333;
-  padding: 20px;
-  margin: 20px;
   border-radius: 10px;
-}
-
-.game-details h2 {
+  width: auto;
+  height: auto;
+  padding: 10px 20px;
   text-align: center;
-  margin-bottom: 20px;
+}
+.filtro label {
+  margin-bottom: 10px; 
+  text-align: center;
+}
+.filtro select {
+  padding: 5px 10px;
+  background-color: #222;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid #797979;
+  
 }
 
-.game-details img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.screenshots {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px 0;
-}
-
-.screenshots img {
-  width: 30%;
-  height: auto;
-  border-radius: 10px;
-}
-
-.details p {
-  margin: 10px 0;
+@media (max-width: 500px) {
+  header .logo {
+    width: 40vw;
+  }
 }
