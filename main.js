@@ -26,7 +26,7 @@ function changeSlide(newSlide) {
 }
 
 // Función para obtener juegos desde la API de Rawg
-const apiKey = "c917c32c98164da594fa9b1655e69d07";
+const apiKey = "8639bc0338b347e4aee1a96a146247a8";
 const apiUrl = `https://api.rawg.io/api/games?key=${apiKey}&page_size=40`;
 const tagUrl = `https://api.rawg.io/api/tags?key=${apiKey}`;
 
